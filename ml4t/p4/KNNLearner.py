@@ -1,0 +1,61 @@
+"""
+ztz: KNNLearner
+learner = knn.KNNLearner(k = 3, verbose = False) # constructor
+learner.addEvidence(Xtrain, Ytrain) # training step
+Y = learner.query(Xtest) # query
+"""
+
+import numpy as np
+
+
+class KNNLearner(object):
+
+    def __init__(self, k = 3, verbose = False):
+        
+        self.k = k
+        self.verbose = verbose
+
+    def addEvidence(self,dataX,dataY):
+        """
+        @summary: Add training data to learner
+        @param dataX: X values of data to add
+        @param dataY: the Y training values
+        """
+        self.trainX = dataX
+        self.trainY = dataY
+        
+    def query(self,dataX):
+        """
+        @summary: Estimate a set of test points given the model we built.
+        @param points: should be a numpy array with each row corresponding to a specific query.
+        @returns the estimated values according to the saved model.
+        """
+        #create predY array
+        predY = np.zeros(dataX.shape[0])
+        
+        if self.verbose == True:
+            print "predY's shape: ",predY.shape
+            print "dataX's shape: ",dataX.shape
+            print "trainX's shape: ",self.trainX.shape
+        
+        #predict every Y of dataX
+        for n in range(0,dataX.shape[0]):
+            #calculate distance 
+
+            dist = np.sqrt(((dataX[n]-self.trainX)**2).sum(axis=1))
+            #another way to calculate distance
+            #for i in range(0,self.trainX.shape[0]):
+            #    dist[i] = np.linalg.norm(dataX[n]-self.trainX[i])
+            #sort distance
+
+            nn = dist.argsort()
+            #choose first k distance
+
+            KNN = nn[0:self.k]
+            #read Y values of k points
+            nearest_point = [self.trainY[idx] for idx in KNN]
+            #mean
+            predY[n] = np.mean(nearest_point)
+        return predY
+if __name__=="__main__":
+    print "the secret clue is 'zzyzx ' from KNNLearner "
