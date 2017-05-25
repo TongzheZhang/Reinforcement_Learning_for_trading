@@ -24,8 +24,8 @@ def test_code(verb = True):
 
     # set parameters for testing
     sym = "ML4T-220"
-    stdate =dt.datetime(2009,12,31)
-    enddate =dt.datetime(2011,12,31)
+    stdate =dt.datetime(2007,12,31)
+    enddate =dt.datetime(2009,12,31)
 
     # get some data for reference
     syms=[sym]
@@ -56,5 +56,5 @@ def test_code(verb = True):
 
 if __name__=="__main__":
     begintime = time.time()
-    test_code(verb = False)
+    test_code(verb = True)
     print 'totaltime', time.time() - begintime

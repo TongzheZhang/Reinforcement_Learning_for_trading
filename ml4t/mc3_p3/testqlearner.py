@@ -90,7 +90,7 @@ if __name__=="__main__":
     verbose = False #print lots of debug stuff if True
 
     # read in the map
-    inf = open('testworlds/world03.csv')
+    inf = open('testworlds/world01.csv')
     data = np.array([map(float,s.strip().split(',')) for s in inf.readlines()])
     originalmap = data.copy() #make a copy so we can revert to the original map later
 
